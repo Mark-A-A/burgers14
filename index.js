@@ -3,7 +3,10 @@ var PORT = process.env.NODE_ENV || 4040;
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var mysql = require('mysql'); 
+var bodyParser = require('body-parser');
 var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Directory for serving public static files
 app.use('/static', express.static(__dirname + '/public'));
@@ -14,6 +17,8 @@ app.set('view engine', 'handlebars');
  
 
 var connection = mysql.createConnection({
+  
+  port     : 3306,
   host     : 'localhost',
   user     : 'root',
   password : '',
@@ -29,7 +34,11 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 });
 
 
+//Ruotes
+//routes go inside controller JS file
+
 app.get('/', function (req, res) {
+    debugger
     console.log("hit the home page");
     var query = ("SELECT * FROM burgers");
     connection.query(query, function (err, results) {
@@ -45,10 +54,21 @@ app.get('/', function (req, res) {
     
 });
 
-//routes go inside controller JS file
-app.post("/create", function (req, res){  
-    console.log("Posting to burgers table in burgers_db");
 
+app.post("/create", function (req, res){
+    debugger
+    console.log("Posting to burgers table in burgers_db");
+    console.log(req);
+    console.log("request body: "+ req.body)
+    var query = "INSERT INTO burgers (burger_name) VALUES ('"+ req.body.burgerToAdd + "')";
+    connection.query(query, function (err, results) {
+      if(err) throw err;
+
+      
+      console.log("Results: " + results); //Results from mysql table burgers
+      res.redirect('/');
+      //res.send(results); //sending results to homepage
+    });
 })
 
 app.listen(PORT, function (){
