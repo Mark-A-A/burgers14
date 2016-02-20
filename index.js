@@ -35,8 +35,11 @@ app.get('/', function (req, res) {
     connection.query(query, function (err, results) {
       if(err) throw err;
 
+      var data = {
+        burgers: results
+      }
       console.log(results); //Results from mysql table burgers
-      res.render('home', results);
+      res.render('home', data);
       //res.send(results); //sending results to homepage
     });
     
