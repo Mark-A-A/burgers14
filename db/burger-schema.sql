@@ -10,3 +10,6 @@ devoured boolean,
 date timestamp,
 PRIMARY KEY (id)
 );
+
+-- tinyint(1) & boolean are synonyms
+-- 0 is false, 1 is true 
