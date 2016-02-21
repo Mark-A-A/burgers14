@@ -71,6 +71,12 @@ app.post("/create", function (req, res){
     });
 })
 
+//connecting to route for deleting row from DB table burgers
+app.delete('/delete/:id', function (req, res) {
+  //deleting row from table
+  console.log("deleting row from table");
+})
+
 app.listen(PORT, function (){
   console.log("Server listening on Port %s", PORT);
 });

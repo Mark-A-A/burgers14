@@ -1,4 +1,4 @@
-/* 
+/* DB ==> Model
 ORM for MVC framework
 */
 
