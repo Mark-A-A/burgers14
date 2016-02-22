@@ -74,9 +74,23 @@ app.post("/create", function (req, res){
 
 //connecting to route for deleting row from DB table burgers
 app.post('/delete/:id', function (req, res) {
+  
+  console.log("req: "+req);
+  console.log("request body: "+ req.body)
+  console.log("req.params: " + req.params);
   //deleting row from table
-  console.log("deleting row from table");
-  res.send("deleting row from table now - you ate a burger");
+  var query = "DELETE FROM burgers WHERE id='" + req.params.id + "'";
+  console.log(query)
+    connection.query(query, function (err, results) {
+      if(err) throw err;
+
+      console.log("deleting row from table");
+      console.log("Results: " + results); //Results from mysql table burgers
+      res.redirect('/');
+      //res.send(results); //sending results to homepage
+    });
+  
+  
 });
 
 app.listen(PORT, function (){
