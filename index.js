@@ -1,3 +1,4 @@
+debugger
 var PORT = process.env.NODE_ENV || 4040;
 
 var express = require('express');
@@ -72,10 +73,11 @@ app.post("/create", function (req, res){
 })
 
 //connecting to route for deleting row from DB table burgers
-app.delete('/delete/:id', function (req, res) {
+app.post('/delete/:id', function (req, res) {
   //deleting row from table
   console.log("deleting row from table");
-})
+  res.send("deleting row from table now - you ate a burger");
+});
 
 app.listen(PORT, function (){
   console.log("Server listening on Port %s", PORT);
