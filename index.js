@@ -10,12 +10,17 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Directory for serving public static files
-app.use('/static', express.static(__dirname + '/public'));
+
+//app.use('/static', express.static(__dirname + '/public'));
 
 //Handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
  
+app.use(express.static('public'));
+// app.use('/css', express.static('public/css'));
+// app.use('/js', express.static('public/js'));
+// app.use('/img', express.static('public/pictures'));
 
 var connection = mysql.createConnection({
   
