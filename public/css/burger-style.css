@@ -1,0 +1,38 @@
+/*
+Color Scheme:;
+#BBDEF0;  7ABEEF
+
+#00A6A6;
+
+#EFCA08;  EFDC7C;
+
+#F49F0A;  F4A41A;
+
+#FF614C;
+*/
+
+body {
+    background-color: #EFDC7C;
+}
+
+.test {
+  /* background-color: #FF614C; */
+}
+
+pre {
+  margin: 10 auto;
+  text-align: left;
+}
+
+.burger-pic {
+   margin: auto;
+   /* left: 450px; */
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  margin: 25px;
+}
+
+
