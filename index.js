@@ -1,5 +1,7 @@
 // debugger
-var PORT = process.env.NODE_ENV || 4040;
+console.log("PORT: "+ process.env.PORT);
+console.log("NODE_ENV: "+NODE_ENV);
+var PORT = process.env.PORT || 4040;
 
 var express = require('express');
 var exphbs  = require('express-handlebars');
