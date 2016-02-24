@@ -22,14 +22,7 @@ app.use(express.static('public'));
 // app.use('/js', express.static('public/js'));
 // app.use('/img', express.static('public/pictures'));
 
-var connection = mysql.createConnection({
-  
-  port     : 3306,
-  host     : '3855uft9zao23e2.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-  user     : 'yrt6xjrsqcx7fth1',
-  password : 'yk6nduh7mluc88wk',
-  database : 'qaxwxfia7ft9ok98'
-});
+var connection = mysql.createConnection(process.env.JAWSDB_URL);
  
 connection.connect();
  
