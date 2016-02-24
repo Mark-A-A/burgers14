@@ -15,8 +15,9 @@ body {
     background-color: #EFDC7C;
 }
 
-.test {
-  /* background-color: #FF614C; */
+.devoured {
+  /*For burgers once they are eaten*/
+   /*background-color: #FF614C; */
 }
 
 pre {
@@ -26,7 +27,7 @@ pre {
 
 .burger-pic {
    margin: auto;
-   /* left: 450px; */
+   left: auto;
 }
 
 img {

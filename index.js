@@ -2,7 +2,7 @@
 console.log("PORT: "+ process.env.PORT);
 
 var PORT = process.env.PORT || 4040;
-
+console.log(PORT); //checking for local port
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var mysql = require('mysql'); 
@@ -24,7 +24,13 @@ app.use(express.static('public'));
 // app.use('/js', express.static('public/js'));
 // app.use('/img', express.static('public/pictures'));
 
-var connection = mysql.createConnection(process.env.JAWSDB_URL);
+var connection = mysql.createConnection(process.env.JAWSDB_URL || {
+
+  host     : 'localhost',
+  user     : 'root',
+  database : 'burgers_db'
+
+});
  
 connection.connect();
  
@@ -33,7 +39,6 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
  
   console.log('The solution is: ', rows[0].solution);
 });
-
 
 //Ruotes
 //routes go inside controller JS file
@@ -73,6 +78,25 @@ app.post("/create", function (req, res){
 })
 
 //connecting to route for deleting row from DB table burgers
+app.post('/devour/:id', function (req, res) {
+  
+  console.log("req: "+req);
+  console.log("request body: "+ req.body)
+  console.log("req.params: " + req.params);
+  //deleting row from table
+  var query = "UPDATE burgers SET devoured=1 WHERE id='" + req.params.id + "'";
+  console.log(query)
+    connection.query(query, function (err, results) {
+      if(err) throw err;
+
+      console.log("deleting row from table");
+      console.log("Results: " + results); //Results from mysql table burgers
+      res.redirect('/');
+      //res.send(results); //sending results to homepage
+    });
+  
+  
+});//connecting to route for deleting row from DB table burgers
 app.post('/delete/:id', function (req, res) {
   
   console.log("req: "+req);
