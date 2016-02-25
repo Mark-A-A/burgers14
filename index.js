@@ -7,58 +7,56 @@ var express = require('express');
 var exphbs  = require('express-handlebars');
 var mysql = require('mysql'); 
 var bodyParser = require('body-parser');
+var router = require('./controller/burger-controller-routes.js');
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Directory for serving public static files
-
-//app.use('/static', express.static(__dirname + '/public'));
-
 //Handlebars
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
- 
+
+// Directory for serving public static files
 app.use(express.static('public'));
+//app.use('/static', express.static(__dirname + '/public'));
 // app.use('/css', express.static('public/css'));
 // app.use('/js', express.static('public/js'));
 // app.use('/img', express.static('public/pictures'));
 
-var connection = mysql.createConnection(process.env.JAWSDB_URL || {
-
-  host     : 'localhost',
-  user     : 'root',
-  database : 'burgers_db'
-
-});
+// var connection = mysql.createConnection(process.env.JAWSDB_URL || {
+//   host     : 'localhost',
+//   user     : 'root',
+//   database : 'burgers_db'
+// });
  
-connection.connect();
+// connection.connect();
  
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
+// connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+//   if (err) throw err;
  
-  console.log('The solution is: ', rows[0].solution);
-});
+//   console.log('The solution is: ', rows[0].solution);
+// });
 
 //Ruotes
 //routes go inside controller JS file
 
-app.get('/', function (req, res) {
-    // debugger
-    console.log("hit the home page");
-    var query = ("SELECT * FROM burgers");
-    connection.query(query, function (err, results) {
-      if(err) throw err;
+app.use("/", router);
+// app.get('/', function (req, res) {
+//     // debugger
+//     console.log("hit the home page");
+//     var query = ("SELECT * FROM burgers");
+//     connection.query(query, function (err, results) {
+//       if(err) throw err;
 
-      var data = {
-        burgers: results
-      }
-      console.log(results); //Results from mysql table burgers
-      res.render('home', data);
-      //res.send(results); //sending results to homepage
-    });
+//       var data = {
+//         burgers: results
+//       }
+//       console.log(results); //Results from mysql table burgers
+//       res.render('home', data);
+//       //res.send(results); //sending results to homepage
+//     });
     
-});
+// });
 
 
 app.post("/create", function (req, res){
@@ -105,16 +103,14 @@ app.post('/delete/:id', function (req, res) {
   //deleting row from table
   var query = "DELETE FROM burgers WHERE id='" + req.params.id + "'";
   console.log(query)
-    connection.query(query, function (err, results) {
-      if(err) throw err;
+  connection.query(query, function (err, results) {
+    if(err) throw err;
 
-      console.log("deleting row from table");
-      console.log("Results: " + results); //Results from mysql table burgers
-      res.redirect('/');
-      //res.send(results); //sending results to homepage
-    });
-  
-  
+    console.log("deleting row from table");
+    console.log("Results: " + results); //Results from mysql table burgers
+    res.redirect('/');
+    //res.send(results); //sending results to homepage
+  });
 });
 
 app.listen(PORT, function (){

@@ -3,11 +3,10 @@
   <div class="col-md-12">
     {{ message }}
   </div>
-
 </div>
 
 <div class="container">
- 
+  
   <div class="row burger-pic" >
     <div class="col-xs-12 col-sm-6 col-md-4  burger-title">
       <h1>Eat Da Burger</h1>
@@ -15,19 +14,12 @@
     <div class="col-xs-12 col-sm-6 col-md-4  burger-pic">
       <img src="/pictures/cartoon-burger.png" >
     </div>
-    
   </div>
- 
   <!--  src="http://www.clker.com/cliparts/5/3/f/4/1194986284683051133burger_http_www.treebuil_.svg.hi.png" src="https://image-gr.s3.envato.com/files/30857230/Cheeseburger-p.jpg"-->
 
-  
-
   {{#each burgers}}
-  
     <div class="row ">
-      
- 
-      
+
       {{#if devoured}}
       <div class="col-md-3 col-md-offset-6 devoured"> 
         <pre>{{id}}. {{burger_name}}  </pre><!-- {{devoured}} --><!-- {{devoured}} {{date}} -->
@@ -52,31 +44,25 @@
         </form>
       </div>
       {{/if}}
-    </div>
-     
-  {{/each}}
 
+    </div>
+  {{/each}}
 
   <form action="/create" method="POST">
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
-      <div class="form-group">
-        <label for="exampleInput1">Your Order</label>
-        <input type="text" name="burgerToAdd" class="form-control" id="exampleInput1" placeholder="Make your burger">
+        <div class="form-group">
+          <label for="exampleInput1">Your Order</label>
+          <input type="text" name="burgerToAdd" class="form-control" id="exampleInput1" placeholder="Make your burger">
+        </div>
       </div>
-   
     </div>
-    </div>
-    
     <div class="row">
       <div class="col-md-4 col-md-offset-4">
          <button type="submit" class="btn btn-default">Place Order</button>
       </div>
-     
-    </div>
-
-    
+    </div> 
   </form>
-</div>
+</div> <!--  end of container -->
   
 
